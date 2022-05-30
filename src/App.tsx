@@ -1,7 +1,8 @@
-import React from 'react';
-//import logo from './logo.svg';
-import './App.css';
 
+import Counter, { test} from './Counter';
+import { ColorBox } from './ColorBox';
+
+test();
 // interface Props {
 //   altText: string;
 // }
@@ -14,21 +15,17 @@ import './App.css';
 
 //Wymysl swoj komponent, ktry robi cos z uzyciem hookow
 
-const Counter = () => {
-  const [Value, setValue] = React.useState(0);
-  return (
-    <div>
-      {Value}
-      <button onClick={() => setValue(Value + 4) }>+</button>
-      <button onClick={() => setValue(Value - 2) }>-</button>
-    </div>
-  )
-}
+
+//Zbuduj formularz, z 3 pól (Imie, Nazwisko, Username[walidacja, wymagany, max 8 znaków])
+//komunikat walidacyjny dla pola username
+//Przycisk Submit
+//Wyswietlone dane z formularza
 
 const App = () =>
   <div className="App">
       <header className="App-header">
       <Counter />
+      <ColorBox/>
       </header>
     </div>
 
