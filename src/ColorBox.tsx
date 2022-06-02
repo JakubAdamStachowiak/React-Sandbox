@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-export const ColorBox = () => {
+export default () => {
     const [color, setColor] = useState("Red");
     const [bgColor, setBgColor] = useState("Black");
     const style = {color : color, background:bgColor};
