@@ -12,10 +12,12 @@ export default () =>{
         <form onSubmit={handleSubmit(onSubmit)}>
             <span>Name:</span> <input {...register("name")}></input> <br></br>
             <span>Surname:</span> <input {...register("surname")}></input><br></br>
-            <span>Username:</span> <input {...register("username", {required : true})}></input>
-            {errors.username && <span> This field is required </span>} <br></br>
+            <span>Username: (Max length: 8)</span> <input {...register("username", {required : true, maxLength: 8})}></input>
+            {errors.username?.type === 'maxLength' && "Max length is 8 characters "}
+            {errors.username?.type === 'required' && "this field is required"}
+            <br></br>
 
-            <input type="submit"></input>
+            <input type="submit" value="Submit"></input>
         </form>
     );
 }
