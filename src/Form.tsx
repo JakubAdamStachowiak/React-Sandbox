@@ -1,10 +1,19 @@
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default () =>{
 
+    const [name, setName] = useState("");
+    const [surname, setSurname] = useState("");
+    const [username, setUsername] = useState("");
+
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = (data: any) => alert(data.name+data.surname+data.username);
+    const onSubmit = (data: any) => {
+        setName(data.name);
+        setSurname(data.surname);
+        setUsername(data.username);
+    };
 
     return(
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -16,7 +25,12 @@ export default () =>{
 
             <input type="submit" value="Submit"></input> <br></br>
 
-            <p>data</p>
+            <p>
+                Name: {name} <br></br>
+                Surname: {surname} <br></br>
+                Username: {username}
+            </p>
+            
         </form>
     );
 }
