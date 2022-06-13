@@ -1,36 +1,59 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import TextField from "./TextField";
+
+export const errorMessages = {
+    required: "This field is required",
+    length: "Max length is 8 characters"
+}
 
 export default () =>{
 
-    const [name, setName] = useState("");
-    const [surname, setSurname] = useState("");
-    const [username, setUsername] = useState("");
-
+    const [submittedData, setSubmittedData] = useState({
+        name: "",
+        surname: "",
+        username: ""
+    }
+    );
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
     const onSubmit = (data: any) => {
-        setName(data.name);
-        setSurname(data.surname);
-        setUsername(data.username);
+        setSubmittedData({
+            name: data.name,
+            surname: data.surname,
+            username: data.username
+        })
     };
 
     return(
         <form onSubmit={handleSubmit(onSubmit)}>
-            <span>Name:</span> <input {...register("name")}></input> <br></br>
-            <span>Surname:</span> <input {...register("surname")}></input><br></br>
-            <span>Username: (Max length: 8)</span> <input {...register("username", {required : true, maxLength: 8})}></input>
-            {errors.username?.type === 'maxLength' && "Max length is 8 characters"}
-            {errors.username?.type === 'required' && "this field is required"} <br></br>
+            <TextField
+                label="Name: " 
+                inputID="name"
+                innerRef={register("name")}
+                errors={errors.name}
+            />
 
+            <TextField
+                label="Surname: " 
+                inputID="surname"
+                innerRef={register("surname")}
+                errors={errors.surname}
+            />
+
+            <TextField
+                label="Username: " 
+                inputID="username"
+                innerRef={register("username")}
+                errors={errors.username}
+            />
             <input type="submit" value="Submit"></input> <br></br>
-
             <p>
-                Name: {name} <br></br>
-                Surname: {surname} <br></br>
-                Username: {username}
+                Name: {submittedData.name}<br></br>
+                Surname: {submittedData.surname}<br></br>
+                Username: {submittedData.username}<br></br>
             </p>
-            
         </form>
     );
 }
