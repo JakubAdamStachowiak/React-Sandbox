@@ -1,15 +1,18 @@
 import { errorMessages } from "./Form";
 
-interface TextProps{
-    label: string;
-    inputID: string;
-    innerRef: any;
-    errors: any;
-}
-export default (props: TextProps, {innerRef} : {innerRef : any}) =>{
+
+const TextField = ({fieldLabel, 
+                    register,
+                    ID,
+                    errorType,
+                    } : any) => {
     return(
         <div>
-            <label>{props.label}</label><input ref={innerRef}></input><span></span><br></br>
+            <label>{fieldLabel}</label>
+            <input {...register(ID)}></input>
+            <p>{errorMessages[errorType as keyof typeof errorMessages]}</p>
         </div>
-    )
-}
+    );
+};
+
+export default TextField;

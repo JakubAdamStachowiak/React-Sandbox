@@ -1,12 +1,18 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup'
 import TextField from "./TextField";
+import * as yup from "yup";
 
 export const errorMessages = {
     required: "This field is required",
-    length: "Max length is 8 characters"
+    max: "Max length is 8 characters"
 }
+
+const scheme = yup.object({
+    username: yup.string().required().max(8)
+})
 
 export default () =>{
 
@@ -16,7 +22,9 @@ export default () =>{
         username: ""
     }
     );
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm(
+        {resolver: yupResolver(scheme)}
+    );
 
     const onSubmit = (data: any) => {
         setSubmittedData({
@@ -28,32 +36,35 @@ export default () =>{
 
     return(
         <form onSubmit={handleSubmit(onSubmit)}>
+
             <TextField
-                label="Name: " 
-                inputID="name"
-                innerRef={register("name")}
-                errors={errors.name}
+                fieldLabel="Name: " 
+                register={register}
+                ID = "name"
+                errorType = {errors.name?.type}
             />
 
             <TextField
-                label="Surname: " 
-                inputID="surname"
-                innerRef={register("surname")}
-                errors={errors.surname}
+                fieldLabel="Surname: " 
+                register={register}
+                ID = "surname"
+                errorType = {errors.surname?.type}
             />
 
             <TextField
-                label="Username: " 
-                inputID="username"
-                innerRef={register("username")}
-                errors={errors.username}
+                fieldLabel="Username: "
+                register={register}
+                ID="username"
+                errorType = {errors.username?.type}
             />
-            <input type="submit" value="Submit"></input> <br></br>
+
+            <input type="submit" value="Submit"></input><br></br>
             <p>
                 Name: {submittedData.name}<br></br>
                 Surname: {submittedData.surname}<br></br>
                 Username: {submittedData.username}<br></br>
             </p>
+
         </form>
     );
 }
