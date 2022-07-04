@@ -2,6 +2,7 @@
 import Counter, {test} from './Counter';
 import ColorBox from './ColorBox';
 import Form from './Form';
+import './App.css';
 
 test();
 // interface Props {
@@ -25,11 +26,11 @@ test();
 const App = () =>
   <div className="App">
       <header className="App-header">
-      <Counter />
-      <ColorBox/>
-      <Form/>
+        <Counter />
+        <ColorBox/>
+        <Form/>
       </header>
-    </div>
+  </div>
 
 // function App() {
 //   return (

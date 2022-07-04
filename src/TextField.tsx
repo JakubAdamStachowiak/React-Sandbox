@@ -3,13 +3,14 @@ import { errorMessages } from "./Form";
 
 const TextField = ({fieldLabel, 
                     register,
-                    ID,
+                    id,
                     errorType,
+                    className,
                     } : any) => {
     return(
-        <div>
+        <div className={className}>
             <label>{fieldLabel}</label>
-            <input {...register(ID)}></input>
+            <input {...register(id)}></input>
             <p>{errorMessages[errorType as keyof typeof errorMessages]}</p>
         </div>
     );

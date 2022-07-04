@@ -35,31 +35,33 @@ export default () =>{
     };
 
     return(
-        <form onSubmit={handleSubmit(onSubmit)}>
-
+        <form onSubmit={handleSubmit(onSubmit)} className="formContainer">
             <TextField
                 fieldLabel="Name: " 
                 register={register}
-                ID = "name"
+                id = "name"
                 errorType = {errors.name?.type}
+                className="formLeft"
             />
 
             <TextField
                 fieldLabel="Surname: " 
                 register={register}
-                ID = "surname"
+                id = "surname"
                 errorType = {errors.surname?.type}
+                className="formMiddle"
             />
 
             <TextField
                 fieldLabel="Username: "
                 register={register}
-                ID="username"
+                id="username"
                 errorType = {errors.username?.type}
+                className="formRight"
             />
 
-            <input type="submit" value="Submit"></input><br></br>
-            <p>
+            <input type="submit" value="Submit" className="formSubmit"></input>
+            <p className="formData">
                 Name: {submittedData.name}<br></br>
                 Surname: {submittedData.surname}<br></br>
                 Username: {submittedData.username}<br></br>
