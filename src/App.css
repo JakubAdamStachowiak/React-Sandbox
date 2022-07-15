@@ -16,28 +16,29 @@
 .formContainer{
   justify-content: center;
   display: grid;
-  grid-gap: 24px;
+  column-gap: 24px;
   grid-template-columns: 15% 15% 15%;
+  grid-template-areas: 
+    "name surname username" 
+    ". submitButton ."
+    ". formData ." ;
 }
 .formLeft{
-  grid-column: 1;
-  grid-row: 1;
+  grid-area: name;
+  justify-self: end;
 }
 .formMiddle{
-  grid-row: 1;
-  grid-column: 2;
+  grid-area: surname;
 }
 .formRight{
-  grid-row: 1;
-  grid-column: 3;
+  grid-area: username;
+  justify-self: start;
 }
 .formData{
-  grid-column: 2;
-  grid-row: 3;
+  grid-area: formData;
 }
 .formSubmit{
-  grid-column: 2;
-  grid-row: 2;
+  grid-area: submitButton;
 }
 .formSubmit, .formData, .formLeft, .formMiddle, .formRight{
   border: 3px dotted red;

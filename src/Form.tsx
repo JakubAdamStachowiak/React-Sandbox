@@ -3,16 +3,16 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup'
 import TextField from "./TextField";
-import * as yup from "yup";
+// import * as yup from "yup";
 
 export const errorMessages = {
     required: "This field is required",
     max: "Max length is 8 characters"
 }
 
-const scheme = yup.object({
-    username: yup.string().required().max(8)
-})
+// const scheme = yup.object({
+//     username: yup.string().required().max(8)
+// })
 
 export default () =>{
 
@@ -23,8 +23,10 @@ export default () =>{
     }
     );
     const { register, handleSubmit, watch, formState: { errors } } = useForm(
-        {resolver: yupResolver(scheme)}
+        // {resolver: yupResolver(scheme)}
     );
+    console.log(errors);
+    console.log(errors.username?.type);
 
     const onSubmit = (data: any) => {
         setSubmittedData({
@@ -37,26 +39,26 @@ export default () =>{
     return(
         <form onSubmit={handleSubmit(onSubmit)} className="formContainer">
             <TextField
+                {...register('name')}
                 fieldLabel="Name: " 
-                register={register}
                 id = "name"
-                errorType = {errors.name?.type}
+                error = {errors.name}
                 className="formLeft"
             />
 
             <TextField
+                {...register('surname')}
                 fieldLabel="Surname: " 
-                register={register}
                 id = "surname"
-                errorType = {errors.surname?.type}
+                error = {errors.surname}
                 className="formMiddle"
             />
 
             <TextField
+                {...register('username', {required: true})}
                 fieldLabel="Username: "
-                register={register}
                 id="username"
-                errorType = {errors.username?.type}
+                error = {errors.username}
                 className="formRight"
             />
 
